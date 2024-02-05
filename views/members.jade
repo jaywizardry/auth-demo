@@ -1,0 +1,33 @@
+extends layout
+
+title='Members'
+block content
+  h1 Members Area
+  p Welcome to the members area
+  table(style="width:100%")
+    tr
+      th Name
+      th Email
+      th Username
+      th Contact
+      th Profile Image
+      th Actions
+
+    each user in users
+      tr
+        td= user.name
+        td= user.email
+        td= user.uname
+        td= user.contact
+        td
+          if user.profileimage
+            img(src="/uploads/"+user.profileimage, alt="Profile Image", style="max-width: 50px; max-height: 50px;")
+          else
+            | No image available
+        if person.role === 'admin'
+          td
+            a.btn.btn-primary-outline(href="/users/edit/#{user._id}") Edit
+            if person._id !== user._id
+                form(method="POST", action="/users/delete/" + user._id, onsubmit="return confirm('Are you sure you want to delete this user?')")
+                  input.btn.btn-primary-outline(type='submit',value='Delete')        
+

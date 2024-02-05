@@ -1,14 +1,14 @@
 extends layout
 
 block content
-    h2.page-header Register
+    h2.page-header Edit
     if errors
       each error, i in errors
         div.alert.alert-danger #{error.msg}
-    form(method='post', action='/users/register',enctype='multipart/form-data')
+    form(method='post', action='/users/edit/'+form.id)
         .form-group
           label Name
-          input.form-control(name='name',type='text',placeholder='Enter your name',id='name',value=form.person)
+          input.form-control(name='name',type='text',placeholder='Enter your name',id='name',value=form.name)
         .form-group
           label Contact-Number
           input.form-control(name='contact',type='number',placeholder='Enter your contact number',maxlength='10',id='contact',value=form.contact)
@@ -24,7 +24,4 @@ block content
         .form-group
           label Confirm Password
           input.form-control(name='cpassword',type='password',placeholder='Confirm password',id='cpassword')
-        .form-group
-          label Profile Image
-          input.form-control(name='profile',type='file')
-        input.btn.btn-primary(type='submit',value='Register')
+        input.btn.btn-primary(type='submit',value='Submit Edit')
